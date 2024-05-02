@@ -8,12 +8,16 @@ options(scipen=999, max.print=5000)
 
 setwd(dirname(getActiveDocumentContext()$path))
 
-mydata <- read.csv("24_4_24.csv", sep = ";", na = c('NA','-77', '-99', '-66'))
+mydata <- read.csv("30_04_24.csv", sep = ";", na = c('NA','-77', '-99', '-66'))
 view(mydata)  
 
 
 mydata <- mydata %>% 
   filter(lfdn > 48) #Retrieve participants from before launch)
+
+
+mydata <- mydata %>% 
+  filter(mogWFH == 1) #Retrieve participants from before launch)
 
 #. Check and delete duplicated cases ----
 #library(dplyr)
@@ -138,7 +142,9 @@ test_data[, new_cols] = 0
 
 new_list <- lapply(1:nrow(test_data), function(i) get_page_ids_history(test_data[i, ]))
 
-new_df <- as.data.frame(do.call(rbind, new_list))
+#new_df <- as.data.frame(do.call(rbind, new_list))
+
+new_df <- bind_rows(new_list)
 
 
 
