@@ -9,10 +9,11 @@ mydata <- read.csv("filtered_data_test.csv", sep = ",", na = c('NA','-77', '-99'
 view(mydata)  
 
 
-
+names(mydata)
 
 #. Rename variables ----
 
+#General variables
 mydata <- reshape::rename(mydata, c("lfdn" = "userID",  #!!!Attention: check, whether this really corresponds to how ppt ID is labelled
                                     
                                     "mogWFH" = "WFHmog",
@@ -224,6 +225,7 @@ duplicates <- mydata %>%
 print(nrow(duplicates)) # Number of duplicates (0)
 
 # Data frame without duplicates
+
 mydata <- mydata %>% distinct(p_0001,.keep_all = T)
 
 names(mydata)
@@ -235,12 +237,14 @@ mydata <- mydata %>%
     ORGsect = ifelse(ORGsect == 15, NA, ORGsect), 
     ORGsize = ifelse(ORGsize == 8, NA, ORGsize),
     WFHopi = ifelse(WFHopi == 6, NA, WFHopi),
-    WFHdec = ifelse(WFHdec == 5, NA, WFHdec),
     WFHnorm = ifelse(WFHnorm == 6, NA, WFHnorm),
     EDUCATION = ifelse(EDUCATION == 8, NA, EDUCATION),
     WFHexp1 = ifelse(WFHexp1 == 7, NA, WFHexp1),
     BRUTTO = ifelse(BRUTTO == 10, NA, BRUTTO),
-    LONE = ifelse(LONE == 6, NA, LONE),
+    LONE = ifelse(LONE == 6| LONE==7, NA, LONE),
+    TRUSTo = ifelse(TRUSTo == 6, NA, TRUSTo),
+    TRUSTs = ifelse(TRUSTs == 6, NA, TRUSTs),
+    WFHdec = ifelse(WFHdec == 5, NA, WFHdec),
     
     JOD1r = ifelse(JOD1r == 6, NA, JOD1r),
     JOD2r = ifelse(JOD2r == 6, NA, JOD2r),
@@ -264,14 +268,9 @@ mydata <- mydata %>%
     JO1r = ifelse(JO1r == 6, NA, JO1r),
     JO2r = ifelse(JO2r == 6, NA, JO2r),
     JO3r = ifelse(JO3r == 6, NA, JO3r),
-    
-    #Attention: Check whethe "LONE" conditional statement works !!    
-    LONE = ifelse(LONE == 6| LONE==7, NA, LONE),
-    TRUSTo = ifelse(TRUSTo == 6, NA, TRUSTo),
-    TRUSTs = ifelse(TRUSTs == 6, NA, TRUSTs),
-    WFHdec = ifelse(WFHdec == 5, NA, WFHdec),
-    
   )
 sum(is.na(mydata))
+#describe(mydata$LONE) #check whether LONE was recoded correctly --> seems to work! 
+
 
 write.csv(mydata, "clean_recoded.csv", row.names = TRUE)
