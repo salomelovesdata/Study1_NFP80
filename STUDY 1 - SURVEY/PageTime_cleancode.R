@@ -22,7 +22,7 @@ mydata <- mydata %>%
 #. Check and delete duplicated cases ----
 #library(dplyr)
 duplicates <- mydata %>% 
-  group_by(p_0001) %>% #here I used 'userID' instead of 'p0001' Correct? 
+  group_by(p_0001) %>% 
   mutate(dupe = n()>1) %>%
   filter(dupe==T)
 print(nrow(duplicates)) # Number of duplicates (0)
@@ -61,7 +61,7 @@ get_min_allowed_time_spent_on_page <- function(page_number) {
   else if (page_number == "277060") {retval = 9 } #exhaustion
   else if (page_number == "276922") {retval = 13 } #WLB/Satisfaction/Commitment/Trust
   else if (page_number == "276923") {retval = 4 } #absence & presence
-  else if (page_number == "280455") {retval = 1 } #intro rest
+  #else if (page_number == "280455") {retval = 1 } #intro rest
   else if (page_number == "276941") {retval = 4 } #motivation to work from home/in the office
   else if (page_number == "276943") {retval = 9 } #ergonomics
   else if (page_number == "276944") {retval = 9 } #ergonomics office
@@ -126,6 +126,7 @@ new_cols = c(
   "enough_time_on_277060",
   "enough_time_on_276922",
   "enough_time_on_276923",
+  #"enough_time_on_280455",
   "enough_time_on_276941",
   "enough_time_on_276943",
   "enough_time_on_276944",
@@ -163,7 +164,7 @@ calc_ratio <- function(x) {
 new_df$ratio = apply(new_df, 1, calc_ratio)
 
 participants_with_high_ratio <- new_df$p_0001[new_df$ratio >= 0.2]  #adapt this to desired ratio. 
-view(participants_with_high_ratio) #retrieve ID from careless responders. 
+view(participants_with_high_ratio) #retrieve ID from careless responders (17 careless responders at 6.05.2023)
 
 mydata <- mydata[!mydata$p_0001 %in% participants_with_high_ratio, ] #clean data (without careless responders)
 
