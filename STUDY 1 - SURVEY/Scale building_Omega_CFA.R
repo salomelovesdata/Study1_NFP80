@@ -6,12 +6,19 @@ options(scipen=999, max.print=5000)
 setwd(dirname(getActiveDocumentContext()$path))
 
 mydata <- read.csv("clean_recoded.csv", sep = ",", na = c('NA','-77', '-99', '-66'))
-view(mydata)  
-
-#______________________________________________________________________________________
 
 
-mydata.selected <- mydata %>% select(c(userID,
+#05 TO CHECK: Select variables relevant for my analyses ----
+
+#!! Attention: Which variables to select here is still to be defined/debated
+names(mydata)
+names(mydata.cleaned)
+mydata.selected <- mydata.cleaned %>% select(c(userID,
+                                               p_0001,
+                                               p_0002,
+                                               p_0003,
+                                               p_0004,
+                                               p_0005,
                                                WFHmog,
                                                Wpct,
                                                Wcur,
@@ -36,12 +43,40 @@ mydata.selected <- mydata %>% select(c(userID,
                                                COMU7,
                                                COMU8,
                                                WFHwish,
+                                               WFHwish_m,
+                                               WFHwish_tu,
+                                               WFHwish_w,
+                                               WFHwish_th,
+                                               WFHwish_f,
+                                               WFHwish_sa,
+                                               WFHwish_su,
+                                               WFHwish_non,
                                                crucial,
                                                WFHday_o,
                                                WFHday_r,
                                                AGday_r,
                                                WFHdec,
+                                               WFHloc1,
+                                               WFHloc2,
+                                               WFHloc3,
+                                               WFHloc4,
+                                               WFHloc5,
                                                WFHnorm,
+                                               JOD1,
+                                               JOD3,
+                                               JOD2,
+                                               JODf,
+                                               JODP1,
+                                               JODP3,
+                                               JODP2,
+                                               JOP1,
+                                               JOP2,
+                                               JOP3,
+                                               JOP4,
+                                               JOPf,
+                                               JSInp,
+                                               JSInf,
+                                               JSIf,
                                                SDTr1,
                                                SDTr2,
                                                SDTr3,
@@ -126,6 +161,36 @@ mydata.selected <- mydata %>% select(c(userID,
                                                JO1,
                                                JO2,
                                                JO3,
+                                               #rts276638,
+                                               #rts276640,
+                                               #rts276644,
+                                               #rts276645,
+                                               #rts276663,
+                                               #rts276891,
+                                               #rts276892,
+                                               #rts276894,
+                                               #rts276896,
+                                               #rts276897,
+                                               #rts276898,
+                                               #rts276915,
+                                               #rts276916,
+                                               #rts276921,
+                                               #rts276922,
+                                               #rts276923,
+                                               #rts276940,
+                                               #rts276941,
+                                               #rts276943,
+                                               #rts276944,
+                                               #rts276946,
+                                               #rts276947,
+                                               #rts277030,
+                                               #rts277059,
+                                               #rts277060,
+                                               #rts277376,
+                                               #rts280445,
+                                               #rts280451,
+                                               #rts280452,
+                                               #rts280455,
                                                JOD1r,
                                                JOD2r,                      
                                                JOD3r,
@@ -140,15 +205,23 @@ mydata.selected <- mydata %>% select(c(userID,
                                                JOPfr,
                                                JSInfr,
                                                JSInpr,
+                                               JSIfr,
                                                JO1r,
                                                JO2r,
                                                JO3r        
 )) 
 
-names(mydata.selected)
+summary (mydata.selected)
 view(mydata.selected)
+names(mydata.selected)
 
-#******************************************************************
+#***********************************************************************
+#05 Scales and reliabilities ----
+
+
+#. Recode relevant variables into numeric
+mydata.scale[] <- lapply(mydata.scale, as.numeric)
+
 
 #. Create latent constructs ----
 
@@ -175,107 +248,128 @@ names(mydata.scale)
 describe(mydata.scale)
 
 
-# Convert them to numeric variables
-mydata.scale[] <- lapply(mydata.scale, as.numeric)
+#. Scale reliabilities: OMEGA ----
 
-# If you get a warning about NAs introduced by coercion, 
-# that means some values could not be converted to numeric.
+#install.packages("GPArotation")
+library(GPArotation)
+library(psych)
 
-names(mydata.scale)
-describe(mydata.scale)
+#.. Omega JOP ---- 
+omega_JOP <- mydata.scale[, c("JOP1r", "JOP2r", "JOP3r", "JOP4r")]
+result_omega_JOP <- omega(omega_JOP)
+print(result_omega_JOP)
 
+#.. Omega EXH----
+omega_EXH <- mydata.scale[, c("EXH1", "EXH2", "EXH3", "EXH4")]
+result_omega_EXH <- omega(omega_EXH)
+print(result_omega_EXH)
 
-#.. Correlations for Justice variables (item level) ----
-sjPlot::tab_corr(mydata.scale[, c("JODfr", 
-                                  "JOD1r", 
-                                  "JOD2r", 
-                                  "JOD3r",
-                                  "JOP1r",
-                                  "JOP2r",
-                                  "JOP3r",
-                                  "JOP4r",
-                                  "JSInfr",
-                                  "JSInpr",
-                                  "JSIfr",
-                                  "JOPfr"
-)], na.deletion = "listwise", corr.method = "pearson", 
-title = "Justice Item Correlations", show.p = TRUE, digits = 2, triangle = "lower", file = "Corr_Justice items_mydata.scale.htm") #correlation matrix
-#If you want the actual p-values instead of asterisks, include ‘p.numeric = TRUE’ as an argument in the sjPlot::tab_corr command.
+#.. Omega JO ----
+omega_JO <- mydata.scale[, c("JO1r", "JO2r", "JO3r")]
+result_omega_JO <- omega(omega_JO)
+print(result_omega_JO)
 
-#.. Correlations for Justice variables (scale level) ----
-sjPlot::tab_corr(mydata.scale[, c("JODfr", 
-                                  "JOPfr",
-                                  "JSIfr",
-                                  "JOD1r", 
-                                  "JOD2r", 
-                                  "JOD3r",
-                                  "JOP",
-                                  "JO",
-                                  "JSInt"
-)], na.deletion = "listwise", corr.method = "pearson", 
-title = "Justice Correlations", show.p = TRUE, digits = 2, triangle = "lower", file = "Corr_Justice_mydata.scale.htm") #correlation matrix
-#If you want the actual p-values instead of asterisks, include ‘p.numeric = TRUE’ as an argument in the sjPlot::tab_corr command.
+#.. Omega TRUST ----
+omega_TRUST <- mydata.scale[, c("TRUSTs", "TRUSTo")] #!!! Not possible
+result_omega_TRUST <- omega(omega_TRUST)
+print(result_omega_TRUST)
 
-sjPlot::tab_corr(mydata.scale[, c("JOPfr",
-                                  "JOP1r", 
-                                  "JOP2r", 
-                                  "JOP3r",
-                                  "JOP4r",
-                                  "JOP"
-)], na.deletion = "listwise", corr.method = "pearson", 
-title = "Procedural Justice Correlations", show.p = TRUE, digits = 2, triangle = "lower", file = "Corr_Procedural Justice_mydata.scale.htm") #correlation matrix
-#If you want the actual p-values instead of asterisks, include ‘p.numeric = TRUE’ as an argument in the sjPlot::tab_corr command.
+#.. Omega JSInt ----
+omega_JSInt <- mydata.scale[, c("JSInpr", "JSInfr")] #!!! Not possible
+result_omega_JSInt <- omega(omega_JSInt)
+print(result_omega_JSInt)
 
-sjPlot::tab_corr(mydata.scale[, c("JSInfr",
-                                  "JSInpr", 
-                                  "JSInt", 
-                                  "JSIfr"
-)], na.deletion = "listwise", corr.method = "pearson", 
-title = "JSI Correlations", show.p = TRUE, digits = 2, triangle = "lower", file = "Corr_JSI_mydata.scale.htm") #correlation matrix
-#If you want the actual p-values instead of asterisks, include ‘p.numeric = TRUE’ as an argument in the sjPlot::tab_corr command.
+#Omega SDT scales & SDT ----
+omega_SDTr <- mydata.scale[, c("SDTr1", "SDTr2","SDTr3","SDTr4")] 
+result_omega_SDTr <- omega(omega_SDTr)
+print(result_omega_SDTr)
 
-sjPlot::tab_corr(mydata.scale[, c("JOPfr",
-                                  "JODfr", 
-                                  "JSIfr",
-                                  "JO"
-)], na.deletion = "listwise", corr.method = "pearson", 
-title = "Jf and JO Correlations", show.p = TRUE, digits = 2, triangle = "lower", file = "Corr_Jf_JO_mydata.scale.htm") #correlation matrix
-#If you want the actual p-values instead of asterisks, include ‘p.numeric = TRUE’ as an argument in the sjPlot::tab_corr command.
+omega_SDTa <- mydata.scale[, c("SDTa1", "SDTa2","SDTa3","SDTa4")] 
+result_omega_SDTa <- omega(omega_SDTa)
+print(result_omega_SDTa)
+
+omega_SDTc <- mydata.scale[, c("SDTc1", "SDTc2","SDTc3","SDTc4")] 
+result_omega_SDTc <- omega(omega_SDTc)
+print(result_omega_SDTc)
+
+omega_SDT <- mydata.scale[, c("SDTr1", "SDTr2","SDTr3","SDTr4",
+                              "SDTa1", "SDTa2","SDTa3","SDTa4",
+                              "SDTc1", "SDTc2","SDTc3","SDTc4")] 
+result_omega_SDT <- omega(omega_SDT)
+print(result_omega_SDT)
 
 
-#.. Correlations for SDT variables (item level) ----
-sjPlot::tab_corr(mydata.scale[, c("SDTr1", 
-                                  "SDTr2", 
-                                  "SDTr3", 
-                                  "SDTr4",
-                                  "SDTc1",
-                                  "SDTc2",
-                                  "SDTc3",
-                                  "SDTc4",
-                                  "SDTa1",
-                                  "SDTa2",
-                                  "SDTa3",
-                                  "SDTa4"
-)], na.deletion = "listwise", corr.method = "pearson", 
-title = "SDT Item Correlations", show.p = TRUE, digits = 2, triangle = "lower", file = "Corr_SDT items_mydata.scale.htm") #correlation matrix
-#If you want the actual p-values instead of asterisks, include ‘p.numeric = TRUE’ as an argument in the sjPlot::tab_corr command.
+#. CFAs ----
 
-#.. Correlations for SDT variables (scale level) ----
-sjPlot::tab_corr(mydata.scale[, c("SDTr", 
-                                  "SDTa", 
-                                  "SDTc"
-)], na.deletion = "listwise", corr.method = "pearson", 
-title = "SDT Scale Correlations", show.p = TRUE, digits = 2, triangle = "lower", file = "Corr_SDT scales_mydata.scale.htm") #correlation matrix
-#If you want the actual p-values instead of asterisks, include ‘p.numeric = TRUE’ as an argument in the sjPlot::tab_corr command.
+pacman::p_load(rstudioapi,dplyr,psych,haven,apaTables,readxl,tidyverse,MplusAutomation,semTools, lavaan, janitor, purr)
 
-#.. Correlations for EXH ----
-sjPlot::tab_corr(mydata.scale[, c("EXH1", 
-                                  "EXH2", 
-                                  "EXH3"
-)], na.deletion = "listwise", corr.method = "pearson", 
-title = "EXH Correlations", show.p = TRUE, digits = 2, triangle = "lower", file = "Corr_EXH_mydata.scale.htm") #correlation matrix
-#If you want the actual p-values instead of asterisks, include ‘p.numeric = TRUE’ as an argument in the sjPlot::tab_corr command.
+#.. CFA for SDT ----
+model_SDT <- 'SDT_r =~ SDTr1 + SDTr2 + SDTr3 + SDTr4
+              SDT_a =~ SDTa1 + SDTa2 + SDTa3 + SDTa4
+              SDT_C =~ SDTc1 + SDTc2 + SDTc3 + SDTc4'
+
+fit.SDT <- cfa(model_SDT, data = mydata.scale)
+
+#install.packages("semPlot")
+library(semPlot)
+library(lavaan)
+summary(fit.SDT, fit.measures = TRUE, standardized = TRUE)
+semPaths(fit.SDT, "par", weighted = FALSE, nCharNodes = 7, shapeMan = "rectangle",
+         sizeMan = 8, sizeMan2 = 5)
 
 
+#.. CFA for Exhaustion ----
+model_Exhaustion <- 'Exhaustion =~ EXH1 + EXH2 + EXH3 + EXH4'
+
+fit.Exhaustion <- cfa(model_Exhaustion, data = mydata.scale)
+
+summary(fit.Exhaustion, fit.measures = TRUE, standardized = TRUE)
+semPaths(fit.Exhaustion, "par", weighted = FALSE, nCharNodes = 7, shapeMan = "rectangle",
+         sizeMan = 8, sizeMan2 = 5)
+
+#.. CFA for JOP ----
+
+model_JOP <- 'JOP_scale =~ JOP1r + JOP2r + JOP3r + JOP4r'
+
+fit.JOP <- cfa(model_JOP, data = mydata.scale)
+
+summary(fit.JOP, fit.measures = TRUE, standardized = TRUE)
+semPaths(fit.JOP, "par", weighted = FALSE, nCharNodes = 7, shapeMan = "rectangle",
+         sizeMan = 8, sizeMan2 = 5)
 
 
+#.. CFA for JOP+JSI ----
+
+model_JOP_JSI <- 'JOP_scale =~ JOP1r + JOP2r + JOP3r + JOP4r 
+                  JSI_scale =~ JSInfr + JSInpr'
+
+fit.JOP.JSI <- cfa(model_JOP_JSI, data = mydata.scale)
+
+summary(fit.JOP.JSI, fit.measures = TRUE, standardized = TRUE)
+
+semPaths(fit.JOP.JSI, "par", weighted = FALSE, nCharNodes = 7, shapeMan = "rectangle",
+         sizeMan = 8, sizeMan2 = 5)
+
+#.. CFA for JOP+JSI+JO ----
+
+model_JOP_JSI_JO <- 'JOP_scale =~ JOP1r + JOP2r + JOP3r + JOP4r 
+                  JSI_scale =~ JSInfr + JSInpr
+                  JO_Scale =~ JO1r + JO2r+ JO3r'
+
+fit.JOP.JSI.JO <- cfa(model_JOP_JSI_JO, data = mydata.scale)
+
+summary(fit.JOP.JSI.JO, fit.measures = TRUE, standardized = TRUE)
+
+semPaths(fit.JOP.JSI.JO, "par", weighted = FALSE, nCharNodes = 7, shapeMan = "rectangle",
+         sizeMan = 8, sizeMan2 = 5)
+
+
+#.. CFA for JO ----
+ 
+model_JO <- 'JO_scale =~ JO1r + JO2r + JO3r'
+
+fit.JO <- cfa(model_JO, data = mydata.scale)
+
+summary(fit.JO, fit.measures = TRUE, standardized = TRUE)
+semPaths(fit.JO, "par", weighted = FALSE, nCharNodes = 7, shapeMan = "rectangle",
+         sizeMan = 8, sizeMan2 = 5)

@@ -62,3 +62,13 @@ summary_table <- lapply(mydata[, c('mogWFH', 'curWork', 'leadPos', 'freelanc', '
 combined_df <- bind_rows(summary_table, .id = "var_name")
 write.csv(combined_df, "frequencies.csv", row.names = TRUE)
 
+
+#If needed
+#convert .csv into .xslX
+frequencies <- read.csv("frequencies.csv")
+library(xlsx)
+xlsx::write.xlsx(frequencies, 
+                 "Frequencies.xls", 
+                 col.names=TRUE, 
+                 row.names=TRUE, 
+                 sheetName="Frequencies_summary_table")
