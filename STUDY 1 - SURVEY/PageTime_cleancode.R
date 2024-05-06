@@ -8,16 +8,16 @@ options(scipen=999, max.print=5000)
 
 setwd(dirname(getActiveDocumentContext()$path))
 
-mydata <- read.csv("30_04_24.csv", sep = ";", na = c('NA','-77', '-99', '-66'))
+mydata <- read.csv("6_05_24.csv", sep = ";", na = c('NA','-77', '-99', '-66'))
 view(mydata)  
 
 
 mydata <- mydata %>% 
   filter(lfdn > 48) #Retrieve participants from before launch)
 
-
+#check data for non HO workers
 mydata <- mydata %>% 
-  filter(mogWFH == 1) #Retrieve participants from before launch)
+  filter(mogWFH == 1) 
 
 #. Check and delete duplicated cases ----
 #library(dplyr)

@@ -69,6 +69,6 @@ frequencies <- read.csv("frequencies.csv")
 library(xlsx)
 xlsx::write.xlsx(frequencies, 
                  "Frequencies.xls", 
-                 col.names=TRUE, 
+                 col.names=TRUE,  gi
                  row.names=TRUE, 
                  sheetName="Frequencies_summary_table")
