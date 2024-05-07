@@ -1,74 +1,371 @@
 Mplus VERSION 8.10
 MUTHEN & MUTHEN
-05/06/2024   1:20 PM
+05/07/2024  10:54 AM
 
 INPUT INSTRUCTIONS
 
   DATA:
-  FILE = "MI_Language_MPlus_f6a9ee3628073b5ece0643b92218ee9d.dat";
+  FILE = "MI_Language_MPlus_152e4ec41440a1863f28820833936cbf.dat";
 
   VARIABLE:
-  NAMES = p_0004;
+  NAMES = SDTr1 SDTr2 SDTr3 SDTr4 SDTc1 SDTc2 SDTc3 SDTc4 SDTa1 SDTa2 SDTa3 SDTa4;
    MISSING=.;
    USEVARIABLE =
-  p_0004 SDTr1 SDTr2 SDTr3 SDTr4 SDTc1 SDTc2 SDTc3 SDTc4 SDTa1 SDTa2 SDTa3 SDTa4;
-  ANALYSIS:
-  ESTIMATOR = MLR;
-    MODEL= CONFIGURAL METRIC SCALAR;
+  SDTr1 SDTr2 SDTr3
+  SDTr4 SDTc1 SDTc2 SDTc3 SDTc4 SDTa1 SDTa2 SDTa3 SDTa4;
   MODEL:
 
-  MODEL T1:
-    REL_1 by SDTr1 SDTr2 SDTr3 SDTr4 (p1-p4);
-    COM_1 by SDTc1 SDTc2 SDTc3 SDTc4 (p5-p8);
-    AUT_1 by SDTa1 SDTa2 SDTa3 SDTa4 (p9-p12);
-
-  [p_0004=1];
-    [p1-p12] (p13-p24);
-
-  [p_0004=2];
-    [p1-p12] (p25-p36);
-
-  [p_0004=3];
-    [p1-p12] (p37-p48);
+      REL by SDTr1 SDTr2 SDTr3 SDTr4;
+      COM by SDTc1 SDTc2 SDTc3 SDTc4;
+      AUT by SDTa1 SDTa2 SDTa3 SDTa4;
   OUTPUT:
   sampstat;
 
-*** ERROR in DEFINE command
-  A new variable included on the USEVARIABLES list was not defined.
-  Check your DEFINE statements.  Undefined variable:  SDTR1
-*** ERROR in DEFINE command
-  A new variable included on the USEVARIABLES list was not defined.
-  Check your DEFINE statements.  Undefined variable:  SDTR2
-*** ERROR in DEFINE command
-  A new variable included on the USEVARIABLES list was not defined.
-  Check your DEFINE statements.  Undefined variable:  SDTR3
-*** ERROR in DEFINE command
-  A new variable included on the USEVARIABLES list was not defined.
-  Check your DEFINE statements.  Undefined variable:  SDTR4
-*** ERROR in DEFINE command
-  A new variable included on the USEVARIABLES list was not defined.
-  Check your DEFINE statements.  Undefined variable:  SDTC1
-*** ERROR in DEFINE command
-  A new variable included on the USEVARIABLES list was not defined.
-  Check your DEFINE statements.  Undefined variable:  SDTC2
-*** ERROR in DEFINE command
-  A new variable included on the USEVARIABLES list was not defined.
-  Check your DEFINE statements.  Undefined variable:  SDTC3
-*** ERROR in DEFINE command
-  A new variable included on the USEVARIABLES list was not defined.
-  Check your DEFINE statements.  Undefined variable:  SDTC4
-*** ERROR in DEFINE command
-  A new variable included on the USEVARIABLES list was not defined.
-  Check your DEFINE statements.  Undefined variable:  SDTA1
-*** ERROR in DEFINE command
-  A new variable included on the USEVARIABLES list was not defined.
-  Check your DEFINE statements.  Undefined variable:  SDTA2
-*** ERROR in DEFINE command
-  A new variable included on the USEVARIABLES list was not defined.
-  Check your DEFINE statements.  Undefined variable:  SDTA3
-*** ERROR in DEFINE command
-  A new variable included on the USEVARIABLES list was not defined.
-  Check your DEFINE statements.  Undefined variable:  SDTA4
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        2257
+
+Number of dependent variables                                   12
+Number of independent variables                                  0
+Number of continuous latent variables                            3
+
+Observed dependent variables
+
+  Continuous
+   SDTR1       SDTR2       SDTR3       SDTR4       SDTC1       SDTC2
+   SDTC3       SDTC4       SDTA1       SDTA2       SDTA3       SDTA4
+
+Continuous latent variables
+   REL         COM         AUT
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+
+Input data file(s)
+  MI_Language_MPlus_152e4ec41440a1863f28820833936cbf.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             1
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              SDTR1         SDTR2         SDTR3         SDTR4         SDTC1
+              ________      ________      ________      ________      ________
+ SDTR1          1.000
+ SDTR2          1.000         1.000
+ SDTR3          1.000         1.000         1.000
+ SDTR4          1.000         1.000         1.000         1.000
+ SDTC1          1.000         1.000         1.000         1.000         1.000
+ SDTC2          1.000         1.000         1.000         1.000         1.000
+ SDTC3          1.000         1.000         1.000         1.000         1.000
+ SDTC4          1.000         1.000         1.000         1.000         1.000
+ SDTA1          1.000         1.000         1.000         1.000         1.000
+ SDTA2          1.000         1.000         1.000         1.000         1.000
+ SDTA3          1.000         1.000         1.000         1.000         1.000
+ SDTA4          1.000         1.000         1.000         1.000         1.000
+
+
+           Covariance Coverage
+              SDTC2         SDTC3         SDTC4         SDTA1         SDTA2
+              ________      ________      ________      ________      ________
+ SDTC2          1.000
+ SDTC3          1.000         1.000
+ SDTC4          1.000         1.000         1.000
+ SDTA1          1.000         1.000         1.000         1.000
+ SDTA2          1.000         1.000         1.000         1.000         1.000
+ SDTA3          1.000         1.000         1.000         1.000         1.000
+ SDTA4          1.000         1.000         1.000         1.000         1.000
+
+
+           Covariance Coverage
+              SDTA3         SDTA4
+              ________      ________
+ SDTA3          1.000
+ SDTA4          1.000         1.000
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           Means
+              SDTR1         SDTR2         SDTR3         SDTR4         SDTC1
+              ________      ________      ________      ________      ________
+                4.062         3.947         3.634         3.765         4.315
+
+
+           Means
+              SDTC2         SDTC3         SDTC4         SDTA1         SDTA2
+              ________      ________      ________      ________      ________
+                4.390         4.423         4.070         4.043         4.012
+
+
+           Means
+              SDTA3         SDTA4
+              ________      ________
+                4.075         3.799
+
+
+           Covariances
+              SDTR1         SDTR2         SDTR3         SDTR4         SDTC1
+              ________      ________      ________      ________      ________
+ SDTR1          0.639
+ SDTR2          0.479         0.971
+ SDTR3          0.397         0.580         0.983
+ SDTR4          0.395         0.579         0.624         0.923
+ SDTC1          0.107         0.138         0.131         0.140         0.387
+ SDTC2          0.071         0.088         0.101         0.087         0.248
+ SDTC3          0.069         0.080         0.070         0.075         0.194
+ SDTC4          0.057         0.077         0.076         0.066         0.196
+ SDTA1          0.097         0.083         0.138         0.143         0.133
+ SDTA2          0.130         0.159         0.202         0.189         0.142
+ SDTA3          0.083         0.062         0.076         0.066         0.146
+ SDTA4          0.101         0.111         0.143         0.155         0.139
+
+
+           Covariances
+              SDTC2         SDTC3         SDTC4         SDTA1         SDTA2
+              ________      ________      ________      ________      ________
+ SDTC2          0.337
+ SDTC3          0.190         0.365
+ SDTC4          0.204         0.223         0.459
+ SDTA1          0.117         0.109         0.137         0.664
+ SDTA2          0.104         0.111         0.140         0.378         0.726
+ SDTA3          0.115         0.092         0.126         0.371         0.363
+ SDTA4          0.118         0.103         0.145         0.351         0.396
+
+
+           Covariances
+              SDTA3         SDTA4
+              ________      ________
+ SDTA3          0.659
+ SDTA4          0.348         0.626
+
+
+           Correlations
+              SDTR1         SDTR2         SDTR3         SDTR4         SDTC1
+              ________      ________      ________      ________      ________
+ SDTR1          1.000
+ SDTR2          0.608         1.000
+ SDTR3          0.501         0.594         1.000
+ SDTR4          0.514         0.611         0.655         1.000
+ SDTC1          0.216         0.225         0.213         0.234         1.000
+ SDTC2          0.153         0.154         0.176         0.156         0.688
+ SDTC3          0.142         0.134         0.117         0.129         0.515
+ SDTC4          0.106         0.115         0.114         0.102         0.465
+ SDTA1          0.150         0.103         0.171         0.182         0.261
+ SDTA2          0.191         0.189         0.239         0.231         0.268
+ SDTA3          0.128         0.078         0.094         0.085         0.290
+ SDTA4          0.160         0.142         0.183         0.204         0.282
+
+
+           Correlations
+              SDTC2         SDTC3         SDTC4         SDTA1         SDTA2
+              ________      ________      ________      ________      ________
+ SDTC2          1.000
+ SDTC3          0.540         1.000
+ SDTC4          0.519         0.544         1.000
+ SDTA1          0.247         0.222         0.247         1.000
+ SDTA2          0.211         0.215         0.243         0.545         1.000
+ SDTA3          0.244         0.188         0.229         0.561         0.525
+ SDTA4          0.257         0.215         0.270         0.544         0.587
+
+
+           Correlations
+              SDTA3         SDTA4
+              ________      ________
+ SDTA3          1.000
+ SDTA4          0.542         1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -26073.127
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     SDTR1                 4.062      -0.803       1.000    0.58%       4.000      4.000      4.000
+            2257.000       0.639       0.856       5.000   29.91%       4.000      5.000
+     SDTR2                 3.947      -0.876       1.000    2.48%       3.000      4.000      4.000
+            2257.000       0.971       0.453       5.000   32.88%       4.000      5.000
+     SDTR3                 3.634      -0.569       1.000    2.97%       3.000      4.000      4.000
+            2257.000       0.983      -0.056       5.000   18.56%       4.000      4.000
+     SDTR4                 3.765      -0.656       1.000    2.30%       3.000      4.000      4.000
+            2257.000       0.923       0.164       5.000   22.64%       4.000      5.000
+     SDTC1                 4.315      -0.506       1.000    0.09%       4.000      4.000      4.000
+            2257.000       0.387       0.343       5.000   39.48%       4.000      5.000
+     SDTC2                 4.390      -0.408       2.000    0.27%       4.000      4.000      4.000
+            2257.000       0.337      -0.231       5.000   43.73%       5.000      5.000
+     SDTC3                 4.423      -0.624       2.000    0.35%       4.000      4.000      4.000
+            2257.000       0.365      -0.038       5.000   48.03%       5.000      5.000
+     SDTC4                 4.070      -0.410       1.000    0.09%       4.000      4.000      4.000
+            2257.000       0.459       0.366       5.000   25.08%       4.000      5.000
+     SDTA1                 4.043      -0.796       1.000    0.66%       3.000      4.000      4.000
+            2257.000       0.664       0.781       5.000   29.69%       4.000      5.000
+     SDTA2                 4.012      -0.667       1.000    0.58%       3.000      4.000      4.000
+            2257.000       0.726       0.189       5.000   30.84%       4.000      5.000
+     SDTA3                 4.075      -0.750       1.000    0.58%       3.000      4.000      4.000
+            2257.000       0.659       0.582       5.000   32.12%       4.000      5.000
+     SDTA4                 3.799      -0.525       1.000    0.71%       3.000      4.000      4.000
+            2257.000       0.626       0.481       5.000   16.57%       4.000      4.000
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       39
+
+Loglikelihood
+
+          H0 Value                      -26303.563
+          H1 Value                      -26073.127
+
+Information Criteria
+
+          Akaike (AIC)                   52685.127
+          Bayesian (BIC)                 52908.277
+          Sample-Size Adjusted BIC       52784.367
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                            460.874
+          Degrees of Freedom                    51
+          P-Value                           0.0000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.060
+          90 Percent C.I.                    0.055  0.065
+          Probability RMSEA <= .05           0.001
+
+CFI/TLI
+
+          CFI                                0.963
+          TLI                                0.952
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                          11145.736
+          Degrees of Freedom                    66
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.032
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ REL      BY
+    SDTR1              1.000      0.000    999.000    999.000
+    SDTR2              1.411      0.043     33.019      0.000
+    SDTR3              1.394      0.046     30.577      0.000
+    SDTR4              1.382      0.045     31.006      0.000
+
+ COM      BY
+    SDTC1              1.000      0.000    999.000    999.000
+    SDTC2              0.963      0.025     39.226      0.000
+    SDTC3              0.822      0.027     30.605      0.000
+    SDTC4              0.876      0.031     28.716      0.000
+
+ AUT      BY
+    SDTA1              1.000      0.000    999.000    999.000
+    SDTA2              1.064      0.034     31.569      0.000
+    SDTA3              0.973      0.031     31.294      0.000
+    SDTA4              1.001      0.032     31.743      0.000
+
+ COM      WITH
+    REL                0.078      0.007     10.495      0.000
+
+ AUT      WITH
+    REL                0.093      0.009     10.359      0.000
+    COM                0.130      0.009     14.981      0.000
+
+ Intercepts
+    SDTR1              4.062      0.017    241.367      0.000
+    SDTR2              3.947      0.021    190.342      0.000
+    SDTR3              3.634      0.021    174.168      0.000
+    SDTR4              3.765      0.020    186.172      0.000
+    SDTC1              4.315      0.013    329.611      0.000
+    SDTC2              4.390      0.012    359.175      0.000
+    SDTC3              4.423      0.013    347.582      0.000
+    SDTC4              4.070      0.014    285.353      0.000
+    SDTA1              4.043      0.017    235.652      0.000
+    SDTA2              4.012      0.018    223.688      0.000
+    SDTA3              4.075      0.017    238.512      0.000
+    SDTA4              3.799      0.017    228.194      0.000
+
+ Variances
+    REL                0.304      0.018     17.318      0.000
+    COM                0.248      0.012     21.194      0.000
+    AUT                0.361      0.019     18.746      0.000
+
+ Residual Variances
+    SDTR1              0.335      0.012     27.743      0.000
+    SDTR2              0.364      0.016     22.824      0.000
+    SDTR3              0.391      0.016     24.165      0.000
+    SDTR4              0.342      0.015     22.953      0.000
+    SDTC1              0.139      0.006     22.382      0.000
+    SDTC2              0.107      0.005     20.360      0.000
+    SDTC3              0.198      0.007     27.900      0.000
+    SDTC4              0.269      0.009     28.745      0.000
+    SDTA1              0.303      0.012     25.380      0.000
+    SDTA2              0.317      0.013     24.770      0.000
+    SDTA3              0.317      0.012     26.187      0.000
+    SDTA4              0.264      0.011     24.220      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.241E-02
+       (ratio of smallest to largest eigenvalue)
+
+
+     Beginning Time:  10:54:56
+        Ending Time:  10:54:56
+       Elapsed Time:  00:00:00
+
 
 
 MUTHEN & MUTHEN
