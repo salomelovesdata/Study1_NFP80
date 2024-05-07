@@ -2,3 +2,6 @@
 *.Rhistory
 *.xlsx
 *.htm
+*.DAT
+*.png
+*inp
