@@ -29,6 +29,28 @@ df_MI_SDT <- mydata %>% select(c(p_0001,
 
 df_MI_SDT <- df_MI_SDT %>% filter(!is.na(p_0004))
 
+
+code <- mplusObject(
+  TITLE = "Measurement invariance for region", 
+  VARIABLE = "
+      NAMES = SDTr1 SDTr2 SDTr3 SDTr4 SDTc1 SDTc2 SDTc3 SDTc4 SDTa1 SDTa2 SDTa3 SDTa4 p_0004;
+      USEVARIABLES = SDTr1 SDTr2 SDTr3 SDTr4 SDTc1 SDTc2 SDTc3 SDTc4 SDTa1 SDTa2 SDTa3 SDTa4;
+      GROUPING = p_0004 (1=GERMAN 2=FRENCH 3=ITALIAN);
+  ", 
+  ANALYSIS = "
+  MODEL = CONFIGURAL METRIC SCALAR;",
+  MODEL = "
+      REL by SDTr1 SDTr2 SDTr3 SDTr4; 
+      COM by SDTc1 SDTc2 SDTc3 SDTc4; 
+      AUT by SDTa1 SDTa2 SDTa3 SDTa4;
+  ",
+  OUTPUT = "sampstat;",
+  rdata = df_MI_SDT
+)
+
+fit <-mplusModeler(code, modelout="TEST_MI.inp", run=1)
+summary(fit)
+
 ########################################################################
 
 italian <- df_MI_SDT %>% 
@@ -92,39 +114,23 @@ descriptive.table_french <- sumtable(french, vars = c(
 
 
 sjPlot::tab_corr(italian[, c("SDTr1", 
-                                  "SDTr2", 
-                                  "SDTr3", 
-                                  "SDTr4",
-                                  "SDTc1",
-                                  "SDTc2",
-                                  "SDTc3",
-                                  "SDTc4",
-                                  "SDTa1",
-                                  "SDTa2",
-                                  "SDTa3",
-                                  "SDTa4"
+                             "SDTr2", 
+                             "SDTr3", 
+                             "SDTr4",
+                             "SDTc1",
+                             "SDTc2",
+                             "SDTc3",
+                             "SDTc4",
+                             "SDTa1",
+                             "SDTa2",
+                             "SDTa3",
+                             "SDTa4"
 )], na.deletion = "listwise", corr.method = "pearson", 
 title = "SDT Item Correlations", show.p = TRUE, digits = 2, triangle = "lower", file = "Corr_SDT items_italian.htm") #correlation matrix
 #If you want the actual p-values instead of asterisks, include ‘p.numeric = TRUE’ as an argument in the sjPlot::tab_corr command.
 
 
 #########################################################################
-
-
-code <- mplusObject(
-VARIABLE = 
-"USEVARIABLE =
-SDTr1 SDTr2 SDTr3 
-SDTr4 SDTc1 SDTc2 SDTc3 SDTc4 SDTa1 SDTa2 SDTa3 SDTa4;",
-    GROUPING = "p_0004 (1 = GERMAN 2 = FRENCH 3 = ITALIAN);",
-MODEL = "
-    REL by SDTr1 SDTr2 SDTr3 SDTr4; 
-    COM by SDTc1 SDTc2 SDTc3 SDTc4; 
-    AUT by SDTa1 SDTa2 SDTa3 SDTa4;",
-OUTPUT = "sampstat;",
-rdata = df_MI_SDT
-)
-fit <- mplusModeler(code, modelout="MI_Language_MPlus.inp", run=TRUE)
 
 
 

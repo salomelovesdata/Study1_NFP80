@@ -8,12 +8,21 @@ options(scipen=999, max.print=5000)
 
 setwd(dirname(getActiveDocumentContext()$path))
 
-mydata <- read.csv("6_05_24.csv", sep = ";", na = c('NA','-77', '-99', '-66'))
+mydata <- read.csv("15_05_24.csv", sep = ";", na = c('NA','-77', '-99', '-66'))
 view(mydata)  
 
 
 mydata <- mydata %>% 
   filter(lfdn > 48) #Retrieve participants from before launch)
+
+#Retrieve test participants from YouGov (email from Julia, 13.05.2024)
+
+mydata <- mydata %>% 
+  filter(!(p_0001 %in% c("2___a7843ea5f0f2ed64bd230ebbd26547d3_QNSBONZW", "2___c1a4b5c9b9b95fd0898e0930a86401cc_QNSBONZW", "2___b70ad35136b10673dcf7b25069d7ba15_QNSBONZW",
+                         "2___1fd09331acd3ca72ed80d7f5cd25211a_QNSBONZW", "2___c670294a76158330b6ee172f1bdb379c_QNSBONZW", "2___c488179f9d36330f0b3d13d8ede4f4c4_QNSBONZW",
+                         "2___04fd340fa20f64792ce3a46fec1954e3_QNSBONZW", "2___6d2d8aad175f801cf7fbe1113e2e63b8_QNSBONZW", "2___f104e472e4bffe7b98ec01c4a9ad0508_QNSBONZW",
+                         "2___9ce61fbd32b2a71cbfa40c5c368b4d67_QNSBONZW", "2___515e1ed0df8de9beb9ffab16a18dd865_QNSBONZW", "2___cb15da1a300f8359e990421d3073af42_QNSBONZW",
+                         "2___479206ceda7e6e8063a20c5d98544e15_QNSBONZW", "2___7c692f9a421e205f662e129699c74eb8_QNSBONZW", "2___cbbb1931fe5776885c36b0989a499e1f_QNSBONZW")))
 
 #check data for non HO workers
 mydata <- mydata %>% 
@@ -163,8 +172,8 @@ calc_ratio <- function(x) {
 
 new_df$ratio = apply(new_df, 1, calc_ratio)
 
-participants_with_high_ratio <- new_df$p_0001[new_df$ratio >= 0.2]  #adapt this to desired ratio. 
-view(participants_with_high_ratio) #retrieve ID from careless responders (17 careless responders at 6.05.2023)
+participants_with_high_ratio <- new_df$p_0001[new_df$ratio >= 0.20]  #adapt this to desired ratio. 
+view(participants_with_high_ratio) #retrieve ID from careless responders (20 careless responders at 15.05.2023)
 
 mydata <- mydata[!mydata$p_0001 %in% participants_with_high_ratio, ] #clean data (without careless responders)
 
