@@ -25,8 +25,8 @@ mydata <- mydata %>%
                          "2___479206ceda7e6e8063a20c5d98544e15_QNSBONZW", "2___7c692f9a421e205f662e129699c74eb8_QNSBONZW", "2___cbbb1931fe5776885c36b0989a499e1f_QNSBONZW")))
 
 #check data for non HO workers
-mydata <- mydata %>% 
-  filter(mogWFH == 1) 
+#mydata <- mydata %>% 
+#  filter(mogWFH == 1) 
 
 #. Check and delete duplicated cases ----
 #library(dplyr)

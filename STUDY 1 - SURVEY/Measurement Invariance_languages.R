@@ -8,6 +8,8 @@ setwd(dirname(getActiveDocumentContext()$path))
 mydata <- read.csv("clean_recoded.csv", sep = ",", na = c('NA','-77', '-99', '-66')) #DATA ALL CLEANED & READY
 view(mydata)  
 
+mydata <- mydata %>% filter(!is.na(p_0004))
+
 
 #It's easier to work with small datasets. Adapt for every construct needed to be tested for MI.
 
@@ -130,7 +132,28 @@ title = "SDT Item Correlations", show.p = TRUE, digits = 2, triangle = "lower", 
 #If you want the actual p-values instead of asterisks, include ‘p.numeric = TRUE’ as an argument in the sjPlot::tab_corr command.
 
 
+
+
 #########################################################################
+mydata$p_0004 <- as.factor(mydata$p_0004)
+
+model <- aov(SDTa4 ~ p_0004, data = mydata)
+
+# View the ANOVA results
+summary(model)
 
 
+
+#SDTr3 - difference between 1-2 and 2-3
+#SDTr4 - difference between 1-2
+#SDTc3 - difference between 1-2 and 1-3
+#SDTa2 - difference between 1-2
+#SDTa3 - difference between 1-2 and 1-3
+
+
+
+
+
+# Bonferroni correction for multiple comparisons
+pairwise.t.test(mydata$SDTa3, mydata$p_0004, p.adj="bonf")
 
