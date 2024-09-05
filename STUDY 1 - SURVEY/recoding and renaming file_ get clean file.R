@@ -210,6 +210,28 @@ mydata$JO1r <- plyr::revalue(as.character(mydata$JO1), c("2" = "1", "3" = "2", "
 mydata$JO2r <- plyr::revalue(as.character(mydata$JO2), c("2" = "1", "3" = "2", "4" = "3", "5" = "4", "6" = "5", "1" = "6")) 
 mydata$JO3r <- plyr::revalue(as.character(mydata$JO3), c("2" = "1", "3" = "2", "4" = "3", "5" = "4", "6" = "5", "1" = "6")) 
 
+#Salome code to recode everything linked to days
+
+#Comuting days
+mydata$COMUdr <- mydata$COMUd - 1
+
+#Wished number of WFH days
+new_values <- c(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7)
+mydata$WFHwishr <- new_values[mydata$WFHwish]
+
+#WFH days allowed
+new_values <- c(0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7)
+mydata$WFHday_or <- new_values[mydata$WFHday_o]
+
+#real WFH days 
+new_values <- c(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7)
+mydata$WFHday_rr <- new_values[mydata$WFHday_r]
+
+#Office days
+new_values <- c(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7)
+mydata$AGday_rr <- new_values[mydata$AGday_r]
+
+
 names(mydata)
 
 #***********************************************************************
