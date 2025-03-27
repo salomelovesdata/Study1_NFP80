@@ -1,12 +1,15 @@
 #DISCLAIMER : 
-# DO NOT RUN ALL THE CODE AT ONCE. ONLY ONE MODULE AT ONCE.
+# IF YOU ARE USING THE RAW DATA (DIRECTLY EXPORTED FROM TIVIAN) - DO NOT RUN ALL THE CODE AT ONCE. ONLY ONE MODULE AT ONCE.
 # ALWAYS RUN STEP 1 AND 2 BEFORE RUNNING ANY OTHER STEP.
+# IF YOU ALREADY HAVE THE "CLEAN_RECODED.CSV" FILE, GO DIRECTLY TO STEP 3 AND FURTHER ON.
 
 #Number 1 step : remove careless responders
 source("PageTime_cleancode.R")
+#you now have a new dataset called "filtered_data.csv"
 
 #Number 2 : recode, rename, treat NAs etc
 source("recoding and renaming file_get clean file.R")
+#you now have a new dataset called "clean_recoded.csv"
 
 
 #Number 3 : facultative - Get descriptives
