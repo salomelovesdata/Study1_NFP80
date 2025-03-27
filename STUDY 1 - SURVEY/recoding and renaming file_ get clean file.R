@@ -14,8 +14,11 @@ names(mydata)
 #. Rename variables ----
 
 #General variables
-mydata <- reshape::rename(mydata, c("lfdn" = "userID",  #!!!Attention: check, whether this really corresponds to how ppt ID is labelled
-                                    
+mydata <- reshape::rename(mydata, c("p_0001" = "userID",
+                                    "p_0002" = "gender",
+                                    "p_0003" = "age",
+                                    "p_0004" = "region",
+                                    "p_0005" = "language",
                                     "mogWFH" = "WFHmog",
                                     "workPct" = "Wpct",
                                     "curWork" = "Wcur",
