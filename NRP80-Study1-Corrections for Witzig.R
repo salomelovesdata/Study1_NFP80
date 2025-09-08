@@ -19,7 +19,7 @@ cat("\014")
 
 # . Data import ----
 setwd(dirname(getActiveDocumentContext()$path))
-data <- read_csv("NRP80-Study1.csv")
+data <- read_csv("NRP80-Study1.csv") #load from SwitchDrive (01- Study 1 > 05 - Media Outlet > Analyses). Dataset is not available on GitHub (public repository)
 
 data.wfh <- data %>% filter(WFHmog == 2)
 
