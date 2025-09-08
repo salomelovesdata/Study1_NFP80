@@ -1,5 +1,11 @@
 # Study1_NFP80
-Code for study 1
+Clean and recoded dataset, as well as the codebook is available on SwitchDrive - 05-Mediat Outlets > 01- Analysis.
+
+
+
+
+Recoding and cleaning of the code:
+If you work with raw data,  follow these instructions:
 
 In this project, we conceived the code in modules.
 
